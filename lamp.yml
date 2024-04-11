@@ -5,7 +5,6 @@
       - name: install apache2 and update pakage
         yum:
            name: apache2
-           update_chche: yes
            state: present
         notify: 
             - restart and enable apache2
