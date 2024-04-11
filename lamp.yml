@@ -3,7 +3,7 @@
   become: yes
   tasks:
       - name: install apache2 and update pakage
-        apt:
+        yum:
            name: apache2
            update_chche: yes
            state: present
@@ -11,7 +11,7 @@
             - restart and enable apache2
 
       - name: install php modules
-        apt:
+        yum:
             name: "{{ item }}"
             state: present
         loop:
