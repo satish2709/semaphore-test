@@ -3,10 +3,10 @@ hosts: all
 become: yes
 tasks:
    - name: install git
-     pakage:
+     yum:
           name: git
           state: present
    - name: uninstall git
-     pakage:
+     yum:
           name: git
           state: absent
