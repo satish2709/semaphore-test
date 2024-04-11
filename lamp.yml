@@ -2,12 +2,12 @@
 - hosts: all
   become: yes
   tasks:
-      - name: install apache2 and update pakage
+      - name: install httpd and update pakage
         yum:
-           name: apache2
+           name: httpd
            state: present
         notify: 
-            - restart and enable apache2
+            - restart and enable httpd
 
       - name: install php modules
         yum:
@@ -19,11 +19,11 @@
             - php-mysql
             - php-cli    
         notify: 
-            - restart and enable apache2
+            - restart and enable httpd
 
   handlers:
-      - name: restart and enabled apache2 
+      - name: restart and enabled httpd 
         service:
-            name: apache2
+            name: httpd
             enabled: yes
             state: restarted
