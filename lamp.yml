@@ -8,6 +8,7 @@
            state: present
         notify: 
             - restart and enable httpd
+        ignore_errors: true    
 
       - name: install php modules
         yum:
@@ -15,11 +16,10 @@
             state: present
         loop:
             - php
-            - libapache2-mod-php
-            - php-mysql
             - php-cli    
         notify: 
             - restart and enable httpd
+        ignore_errors: true    
 
   handlers:
       - name: restart and enabled httpd 
