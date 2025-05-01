@@ -2,12 +2,12 @@
 - hosts: all
   become: yes
   tasks:
-      - name: install httpd and update pakage
+      - name: install apache2 and update pakage
         apt:
-           name: httpd
+           name: apache2
            state: present
         notify: 
-            - restart and enable httpd
+            - restart and enable apache2
         ignore_errors: true    
 
       - name: install php modules
@@ -18,12 +18,12 @@
             - php
             - php-cli    
         notify: 
-            - restart and enable httpd
+            - restart and enable apache2
         ignore_errors: true    
 
   handlers:
-      - name: restart and enabled httpd 
+      - name: restart and enabled apache2 
         service:
-            name: httpd
+            name: apache2
             enabled: yes
             state: restarted
