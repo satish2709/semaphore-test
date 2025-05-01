@@ -3,7 +3,7 @@
   become: yes
   tasks:
       - name: install httpd and update pakage
-        yum:
+        apt:
            name: httpd
            state: present
         notify: 
@@ -11,7 +11,7 @@
         ignore_errors: true    
 
       - name: install php modules
-        yum:
+        apt:
             name: "{{ item }}"
             state: present
         loop:
