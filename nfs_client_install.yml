@@ -18,7 +18,8 @@
       state: directory
 
   - name: Mount NFS Share nfs-server:/usr/local
-    ansible.posix.mount:
+    #ansible.posix.mount:
+    mount:
       src: 192.168.1.145:/nfs-share
       path: /mnt/server_data
       fstype: nfs
