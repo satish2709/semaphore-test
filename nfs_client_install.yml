@@ -1,0 +1,39 @@
+- hosts: all
+  become: yes
+  tasks:
+
+  - name: install nfs modules
+    yum:
+      name: "{{ item }}"
+      state: present
+    loop:
+    - nfs-utils
+    - nfs-server
+    notify:
+    - restart and enable nfs
+
+  - name: create directory
+    ansible.builtin.file:
+      path: /mnt/server_data
+      state: directory
+
+  - name: Mount NFS Share nfs-server:/usr/local
+    ansible.posix.mount:
+      src: 192.168.1.145:/nfs-share
+      path: /mnt/server_data
+      fstype: nfs
+      opts: rw,nconnect=16,nfsvers=3,tcp,hard,intr,timeo=600,retrans=2,rsize=524288,wsize=524288
+      state: mounted
+
+  - name: service rpcbind start
+    service:
+      name: rpcbind
+      enabled: yes
+      state: restarted
+
+  handlers:
+  - name: restart and enabled nfs
+    service:
+      name: nfs-server
+      enabled: yes
+      state: restarted
